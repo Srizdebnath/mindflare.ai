@@ -91,28 +91,28 @@ export default function Home() {
 
   const features = [
     {
-      title: "Knowledge Bases",
-      description: "Upload documents, crawl websites, or sync with GitHub to ground your AI in your own data.",
-      icon: BookOpen,
-      videoSrc: "/assets/knowledge_base.mp4",
+      title: "Auth0 Integration",
+      description: "Secure your AI apps with seamless authentication and robust user access controls.",
+      icon: Zap,
+      videoSrc: "/assets/autho.mp4",
     },
     {
-      title: "SDK Integration",
-      description: "Connect your application with our powerful JS SDK in just a few lines of code.",
+      title: "SDK Core",
+      description: "Connect your application to our neural engine with our powerful, lightweight Javascript SDK.",
       icon: Blocks,
       videoSrc: "/assets/sdk.mp4",
     },
     {
-      title: "Multi-channel",
-      description: "Deploy your AI models across WhatsApp, Telegram, or any custom platform using our robust backend.",
+      title: "Multi-channel Hub",
+      description: "Deploy your AI models across WhatsApp, Telegram, or any platform with single-click simplicity.",
       icon: Share2,
-      videoSrc: "/assets/whatsapp.mp4",
+      videoSrc: "/assets/multi-channel.mp4",
     },
     {
-      title: "Analytics",
-      description: "Track usage, monitor costs, and gain insights into how users interact with your AI apps.",
-      icon: LineChart,
-      videoSrc: "/assets/analytics.mp4",
+      title: "Knowledge Engine",
+      description: "Train your model on custom datasets from PDFs, websites, or GitHub repositories instantly.",
+      icon: BookOpen,
+      videoSrc: "/assets/knowledge.mp4",
     },
   ];
 
