@@ -190,7 +190,7 @@ function TreeCanvas({
                             width: NODE_W,
                             height: NODE_H,
                         }}
-                        onMouseEnter={(e) => {
+                        onMouseEnter={() => {
                             if (n.node.preview) {
                                 setTooltip({ node: n.node, x: n.x + PAD + NODE_W + 8, y: n.y + PAD });
                             }

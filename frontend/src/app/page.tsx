@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, BookOpen, Blocks, Share2, LineChart, Cpu, Zap } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import Navbar from '@/components/Navbar';
 import { cn } from '@/lib/utils';
@@ -94,27 +94,29 @@ export default function Home() {
       title: "Knowledge Bases",
       description: "Upload documents, crawl websites, or sync with GitHub to ground your AI in your own data.",
       icon: BookOpen,
-      videoSrc: "https://www.w3schools.com/html/mov_bbb.mp4", // Placeholder for Animation
+      videoSrc: "/assets/knowledge_base.mp4",
     },
     {
       title: "SDK Integration",
       description: "Connect your application with our powerful JS SDK in just a few lines of code.",
       icon: Blocks,
-      videoSrc: "https://www.w3schools.com/html/mov_bbb.mp4", // Placeholder for SDK
+      videoSrc: "/assets/sdk.mp4",
     },
     {
       title: "Multi-channel",
       description: "Deploy your AI models across WhatsApp, Telegram, or any custom platform using our robust backend.",
       icon: Share2,
-      videoSrc: "https://www.w3schools.com/html/mov_bbb.mp4", // Placeholder for WhatsApp Integration
+      videoSrc: "/assets/whatsapp.mp4",
     },
     {
       title: "Analytics",
       description: "Track usage, monitor costs, and gain insights into how users interact with your AI apps.",
       icon: LineChart,
-      videoSrc: "https://www.w3schools.com/html/mov_bbb.mp4", // Placeholder for Analytics
+      videoSrc: "/assets/analytics.mp4",
     },
   ];
+
+  const [videoError, setVideoError] = useState<Record<number, boolean>>({});
 
   return (
     <div className="min-h-screen text-retro-white flex flex-col overflow-hidden">
@@ -280,15 +282,28 @@ export default function Home() {
             <div className="lg:col-span-8 relative min-h-[400px] flex items-center">
               <div className="w-full h-full border-3 border-retro-border shadow-pixel-lg bg-retro-panel overflow-hidden">
                 <AnimatePresence mode="wait">
-                  <motion.div key={activeFeature} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.1, ease: "linear" }} className="w-full h-full p-2 min-h-[400px]">
-                    <video
-                      src={features[activeFeature].videoSrc}
-                      autoPlay
-                      muted
-                      playsInline
-                      onEnded={() => setActiveFeature((prev) => (prev + 1) % features.length)}
-                      className="w-full h-full object-cover border-3 border-retro-border shadow-pixel-sm"
-                    />
+                  <motion.div key={activeFeature} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.1, ease: "linear" }} className="w-full h-full p-2 min-h-[400px] flex items-center justify-center">
+                    {videoError[activeFeature] ? (
+                      /* ── Placeholder shown when video file is missing ── */
+                      <div className="w-full min-h-[380px] flex flex-col items-center justify-center gap-4 border-3 border-dashed border-retro-border bg-retro-card">
+                        {React.createElement(features[activeFeature].icon, { className: "w-12 h-12 text-retro-muted" })}
+                        <p className="font-pixel text-sm text-retro-muted">{features[activeFeature].title.toUpperCase()}</p>
+                        <p className="font-mono text-xs text-retro-dim">
+                          Drop <span className="text-retro-cyan">{features[activeFeature].videoSrc}</span> into <span className="text-retro-cyan">frontend/public/assets/</span>
+                        </p>
+                      </div>
+                    ) : (
+                      <video
+                        key={features[activeFeature].videoSrc}
+                        src={features[activeFeature].videoSrc}
+                        autoPlay
+                        muted
+                        playsInline
+                        onEnded={() => setActiveFeature((prev) => (prev + 1) % features.length)}
+                        onError={() => setVideoError((prev) => ({ ...prev, [activeFeature]: true }))}
+                        className="w-full h-full object-cover border-3 border-retro-border shadow-pixel-sm"
+                      />
+                    )}
                   </motion.div>
                 </AnimatePresence>
               </div>
