@@ -1,9 +1,10 @@
 "use client";
 
+import { Suspense } from "react";
 import { useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export default function GitHubCallbackPage() {
+function GitHubCallbackContent() {
     const router = useRouter();
     const searchParams = useSearchParams();
 
@@ -43,5 +44,13 @@ export default function GitHubCallbackPage() {
                 <p className="text-zinc-400 font-sans">Connecting GitHub…</p>
             </div>
         </div>
+    );
+}
+
+export default function GitHubCallbackPage() {
+    return (
+        <Suspense fallback={null}>
+            <GitHubCallbackContent />
+        </Suspense>
     );
 }

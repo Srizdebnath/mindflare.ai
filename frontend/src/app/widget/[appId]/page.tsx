@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, Suspense } from 'react';
 import { useParams, useSearchParams } from 'next/navigation';
 import { Send, Sparkles, RefreshCw, Bot, User, Zap } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -57,7 +57,7 @@ interface Message {
     content: string;
 }
 
-export default function ChatWidget() {
+function ChatWidgetContent() {
     const params = useParams();
     const searchParams = useSearchParams();
     const appId = params.appId as string;
@@ -247,5 +247,13 @@ export default function ChatWidget() {
                 </p>
             </div>
         </div>
+    );
+}
+
+export default function ChatWidget() {
+    return (
+        <Suspense fallback={null}>
+            <ChatWidgetContent />
+        </Suspense>
     );
 }

@@ -1,4 +1,5 @@
 "use client";
+import { Suspense } from 'react';
 
 import React, { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -30,7 +31,7 @@ interface AppDoc {
     last_active?: string;
 }
 
-export default function ApplicationsPage() {
+function ApplicationsContent() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const [apps, setApps] = useState<AppDoc[]>([]);
@@ -720,5 +721,13 @@ export default function ApplicationsPage() {
                 )}
             </AnimatePresence>
         </div>
+    );
+}
+
+export default function ApplicationsPage() {
+    return (
+        <Suspense fallback={null}>
+            <ApplicationsContent />
+        </Suspense>
     );
 }
