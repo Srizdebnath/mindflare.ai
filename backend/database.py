@@ -22,7 +22,8 @@ try:
 
     # Check connection
     client.admin.command("ping")
-    db = client.get_database()
+    # Use 'mindflare' as default if not specified in URI
+    db = client.get_database("mindflare")
     logger.info("MongoDB connected successfully")
 except Exception as e:
     logger.critical(f"Failed to connect to MongoDB: {e}")
