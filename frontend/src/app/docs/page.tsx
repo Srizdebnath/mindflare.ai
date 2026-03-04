@@ -237,23 +237,6 @@ export default function DocsPage() {
                                     </section>
 
                                     <section>
-                                        <SectionHeader title="Python SDK Support" icon={Blocks} />
-                                        <p className="text-retro-muted mb-6 font-mono text-sm leading-relaxed">
-                                            Full multi-key strict authentication is also available in our official Python SDK.
-                                        </p>
-                                        <DosTerminal title="python">
-                                            <span className="text-retro-muted">## pip install mindflare-py</span>{"\n"}
-                                            <span className="text-[#7B9EC4]">from</span> mindflare <span className="text-[#7B9EC4]">import</span> Mindflare{"\n\n"}
-                                            mf = Mindflare({"\n"}
-                                            &nbsp;&nbsp;apiKey=<span className="text-[#A8D8B0]">"mf_secret_xyz"</span>,{"\n"}
-                                            &nbsp;&nbsp;baseUrl=<span className="text-[#A8D8B0]">"https://mindflare-api.onrender.com"</span>{"\n"}
-                                            ){"\n\n"}
-                                            reply = mf.ask(<span className="text-[#A8D8B0]">"What is neural orchestration?"</span>){"\n"}
-                                            print(reply)
-                                        </DosTerminal>
-                                    </section>
-
-                                    <section>
                                         <SectionHeader title="Security & Identity" icon={Shield} />
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div className="bg-retro-panel border-3 border-retro-border p-5">

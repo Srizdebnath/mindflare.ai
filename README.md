@@ -10,7 +10,7 @@ MindflareAI is a comprehensive "Orchestration-as-a-Service" platform designed fo
 - **Neural Orchestration**: Manage multiple AI agents and pipelines from a single dashboard.
 - **Auto-RAG Knowledge Bases**: Instantly ingest PDFs, websites, and GitHub repos into vector space.
 - **Enterprise Security**: Multilayer authentication with native MongoDB sessions, standard JWTs, and secure CLI keys.
-- **Developer First**: Robust CLI tool, TypeScript SDK, and Python SDK for deep integration.
+- **Developer First**: Robust CLI tool and TypeScript SDK for deep integration.
 - **WhatsApp Integration**: Deploy your knowledge bases directly to WhatsApp with one command.
 
 ---
