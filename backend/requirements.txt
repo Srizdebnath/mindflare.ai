@@ -7,7 +7,6 @@ annotated-doc==0.0.4
 annotated-types==0.7.0
 anyio==4.12.1
 attrs==25.4.0
-auth0-python==4.7.1
 beautifulsoup4==4.12.3
 billiard==4.2.4
 blinker==1.9.0

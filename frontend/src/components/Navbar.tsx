@@ -63,10 +63,12 @@ export default function Navbar() {
                             <button onClick={login} className="font-mono text-sm text-retro-muted hover:text-retro-white transition-none ml-2">
                                 Log in
                             </button>
-                            <Button onClick={login} variant="default" size="sm"
-                                className="font-pixel text-lg tracking-wide">
-                                Sign up Free
-                            </Button>
+                            <Link href="/signup">
+                                <Button variant="default" size="sm"
+                                    className="font-pixel text-lg tracking-wide">
+                                    Sign up Free
+                                </Button>
+                            </Link>
                         </>
                     ) : (
                         <>

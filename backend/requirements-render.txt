@@ -55,5 +55,3 @@ google-generativeai==0.8.4
 # Web crawling via Firecrawl API
 firecrawl-py>=1.0.0
 
-# Auth0
-auth0-python==4.7.1

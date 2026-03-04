@@ -2,73 +2,66 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useUser } from '@auth0/nextjs-auth0/client';
+import { useRouter } from 'next/navigation';
+import { getProfile, logout as nativeLogout } from '@/lib/auth-client';
 
 export function useAuth() {
-    const { user: auth0User, isLoading: auth0Loading, error } = useUser();
-    const [backendUser, setBackendUser] = useState<any>(null);
-    const [isSyncing, setIsSyncing] = useState(false);
+    const router = useRouter();
+    const [user, setUser] = useState<any>(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState<any>(null);
+
+    const fetchUser = async (tk: string) => {
+        setIsLoading(true);
+        try {
+            const data = await getProfile(tk);
+            if (data.user) {
+                setUser(data.user);
+            } else {
+                setUser(null);
+            }
+        } catch (err: any) {
+            console.error("Failed to fetch profile:", err);
+            setError(err.message);
+            // If token is invalid, clear it
+            localStorage.removeItem('token');
+            setUser(null);
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     useEffect(() => {
-        if (auth0User && !auth0Loading && typeof window !== 'undefined') {
-            const currentToken = localStorage.getItem('token');
+        if (typeof window === 'undefined') return;
 
-            const fetchBackendProfile = async (tk: string) => {
-                try {
-                    const res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/auth/me', {
-                        headers: { 'Authorization': `Bearer ${tk}` }
-                    });
-                    const d = await res.json();
-                    if (d.user) setBackendUser(d.user);
-                } catch (err) {
-                    console.error("Failed to fetch backend profile:", err);
-                }
-            };
-
-            if (!currentToken) {
-                // Sync Auth0 with Python backend to get a CLI/SDK compatible token
-                setIsSyncing(true);
-                fetch('/api/auth/sync')
-                    .then(r => r.json())
-                    .then(d => {
-                        if (d.token) {
-                            localStorage.setItem('token', d.token);
-                            if (d.user) setBackendUser(d.user);
-                            else fetchBackendProfile(d.token);
-                        }
-                    })
-                    .finally(() => setIsSyncing(false));
-            } else if (!backendUser) {
-                fetchBackendProfile(currentToken);
-            }
-        } else if (!auth0User && !auth0Loading && typeof window !== 'undefined') {
-            // Unauthenticated
-            localStorage.removeItem('token');
-            setBackendUser(null);
+        const token = localStorage.getItem('token');
+        if (token) {
+            fetchUser(token);
+        } else {
+            setUser(null);
+            setIsLoading(false);
         }
-    }, [auth0User, auth0Loading, backendUser]);
+    }, []);
 
     const login = () => {
-        window.location.href = '/api/auth/login';
+        router.push('/login');
     };
 
     const logout = () => {
-        localStorage.removeItem('token');
-        setBackendUser(null);
-        window.location.href = '/api/auth/logout';
+        nativeLogout();
+        setUser(null);
     };
-
-    const user = React.useMemo(() => {
-        if (!auth0User && !backendUser) return null;
-        return backendUser ? { ...auth0User, ...backendUser } : auth0User;
-    }, [auth0User, backendUser]);
 
     return React.useMemo(() => ({
         user,
-        isLoading: auth0Loading || isSyncing,
+        isLoading,
         error,
-        isAuthenticated: !!auth0User,
+        isAuthenticated: !!user,
         login,
         logout,
-    }), [user, auth0Loading, isSyncing, error, auth0User]);
+        refresh: () => {
+            const tk = localStorage.getItem('token');
+            if (tk) fetchUser(tk);
+        }
+    }), [user, isLoading, error]);
 }
