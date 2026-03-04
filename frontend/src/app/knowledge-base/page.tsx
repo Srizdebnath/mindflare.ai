@@ -297,7 +297,7 @@ export default function KnowledgeBasePage() {
     const fetchKBs = async () => {
         if (!token) return;
         try {
-            const res = await fetch('http://localhost:5000/api/knowledge_base/', {
+            const res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/knowledge_base/', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const data = await res.json();
@@ -336,7 +336,7 @@ export default function KnowledgeBasePage() {
                         onClick={async () => {
                             toast.dismiss(t.id);
                             try {
-                                await fetch(`http://localhost:5000/api/knowledge_base/${kbId}`, {
+                                await fetch(`${process.env.NEXT_PUBLIC_API_URL}/knowledge_base/${kbId}`, {
                                     method: 'DELETE',
                                     headers: { 'Authorization': `Bearer ${token}` }
                                 });
@@ -379,7 +379,7 @@ export default function KnowledgeBasePage() {
                 options.body = JSON.stringify({ kb_name: kbName, source_type: sourceType, source_url: sourceUrl });
             }
 
-            const res = await fetch('http://localhost:5000/api/knowledge_base/', options);
+            const res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/knowledge_base/', options);
             toast.dismiss(tid);
             if (res.ok) {
                 toast.success(`"${kbName}" is being processed. This may take a moment.`);

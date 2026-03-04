@@ -311,7 +311,7 @@ export default function KBTreeVisualization({ kbId, kbName, sourceType, token, o
         setLoading(true);
         setError(null);
         try {
-            const res = await fetch(`http://localhost:5000/api/knowledge_base/${kbId}/tree`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/knowledge_base/${kbId}/tree`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             if (!res.ok) {

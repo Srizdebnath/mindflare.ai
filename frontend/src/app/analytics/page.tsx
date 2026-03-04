@@ -23,7 +23,7 @@ export default function AnalyticsPage() {
     useEffect(() => {
         if (!token) { router.push('/login'); return; }
 
-        fetch('http://localhost:5000/api/analytics/stats', {
+        fetch(process.env.NEXT_PUBLIC_API_URL + '/analytics/stats', {
             headers: { 'Authorization': `Bearer ${token}` }
         })
             .then(r => r.json())

@@ -31,14 +31,14 @@ export default function DashboardPage() {
         const token = localStorage.getItem('token') || 'temp';
 
         // Fetch counts
-        fetch('http://localhost:5000/api/applications/', {
+        fetch(process.env.NEXT_PUBLIC_API_URL + '/applications/', {
             headers: { 'Authorization': `Bearer ${token}` }
         })
             .then(r => r.json())
             .then(d => setAppCount(d.applications?.length || 0))
             .catch(() => { });
 
-        fetch('http://localhost:5000/api/knowledge_base/', {
+        fetch(process.env.NEXT_PUBLIC_API_URL + '/knowledge_base/', {
             headers: { 'Authorization': `Bearer ${token}` }
         })
             .then(r => r.json())
@@ -46,7 +46,7 @@ export default function DashboardPage() {
             .catch(() => { });
 
         // Fetch logs
-        fetch('http://localhost:5000/api/analytics/logs', {
+        fetch(process.env.NEXT_PUBLIC_API_URL + '/analytics/logs', {
             headers: { 'Authorization': `Bearer ${token}` }
         })
             .then(r => r.json())

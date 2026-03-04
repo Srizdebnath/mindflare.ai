@@ -17,7 +17,7 @@ export const config = new Conf<ConfigSchema>({
     projectName: "mindflare",
     defaults: {
         token: "",
-        baseUrl: "http://localhost:5000",
+        baseUrl: "https://mindflare-api.onrender.com",
         defaultAppId: "",
     },
 });

@@ -5,7 +5,7 @@ import logging
 class Mindflare:
     """Official Mindflare Python Client."""
     
-    def __init__(self, email, password, client_secret, app_id, api_key, base_url="http://localhost:5000"):
+    def __init__(self, email, password, client_secret, app_id, api_key, base_url="https://mindflare-api.onrender.com"):
         self.email = email
         self.password = password
         self.client_secret = client_secret

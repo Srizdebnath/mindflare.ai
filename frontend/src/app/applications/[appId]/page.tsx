@@ -109,7 +109,7 @@ export default function AppDetailsPage() {
         if (!token) return;
 
         // Fetch app config
-        fetch(`http://localhost:5000/api/applications/${appId}`, {
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/applications/${appId}`, {
             headers: { 'Authorization': `Bearer ${token}` }
         }).then(r => r.json()).then(d => {
             if (d.app) {
@@ -125,13 +125,13 @@ export default function AppDetailsPage() {
         }).catch(() => router.push('/applications'));
 
         // Fetch knowledge bases
-        fetch('http://localhost:5000/api/knowledge_base/', {
+        fetch(process.env.NEXT_PUBLIC_API_URL + '/knowledge_base/', {
             headers: { 'Authorization': `Bearer ${token}` }
         }).then(r => r.json()).then(d => setKbs(d.knowledge_bases || []));
 
         // Fetch live models from backend
         setModelsLoading(true);
-        fetch('http://localhost:5000/api/models/', {
+        fetch(process.env.NEXT_PUBLIC_API_URL + '/models/', {
             headers: { 'Authorization': `Bearer ${token}` }
         }).then(r => r.json()).then(d => {
             setModels(d.models || []);
@@ -183,7 +183,7 @@ export default function AppDetailsPage() {
                         const formData = new FormData();
                         formData.append('audio', audioBlob, 'audio.webm');
 
-                        const res = await fetch('http://localhost:5000/api/voice/transcribe', {
+                        const res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/voice/transcribe', {
                             method: 'POST',
                             headers: { 'Authorization': `Bearer ${token}` },
                             body: formData
@@ -223,7 +223,7 @@ export default function AppDetailsPage() {
         if (!token || !voiceEnabled) return;
 
         try {
-            const res = await fetch('http://localhost:5000/api/voice/synthesize', {
+            const res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/voice/synthesize', {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
                 body: JSON.stringify({ text, voice_id: selectedVoiceId })
@@ -257,7 +257,7 @@ export default function AppDetailsPage() {
         setSaving(true);
         const tid = toast.loading('Saving configuration...');
         try {
-            const res = await fetch(`http://localhost:5000/api/applications/${appId}/config`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/applications/${appId}/config`, {
                 method: 'PUT',
                 headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -299,7 +299,7 @@ export default function AppDetailsPage() {
                 setCurrentlyPlayingAudio(null);
             }
 
-            const res = await fetch(`http://localhost:5000/api/chat/playground/${appId}`, {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/chat/playground/${appId}`, {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
                 body: JSON.stringify({ messages: newMessages })
@@ -540,7 +540,7 @@ export default function AppDetailsPage() {
                                                         if (!systemPrompt.trim() || generatingPrompt) return;
                                                         setGeneratingPrompt(true);
                                                         try {
-                                                            const res = await fetch('http://localhost:5000/api/applications/generate-prompt', {
+                                                            const res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/applications/generate-prompt', {
                                                                 method: 'POST',
                                                                 headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
                                                                 body: JSON.stringify({ description: systemPrompt })

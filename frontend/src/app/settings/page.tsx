@@ -33,7 +33,7 @@ export default function SettingsPage() {
         if (password !== 'PURGE') return;
 
         try {
-            const res = await fetch('http://localhost:5000/api/auth/purge', {
+            const res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/auth/purge', {
                 method: 'DELETE',
                 headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
             });
@@ -51,7 +51,7 @@ export default function SettingsPage() {
         setIsRevealing(true);
         setRevealError('');
         try {
-            const res = await fetch('http://localhost:5000/api/applications/reveal-keys', {
+            const res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/applications/reveal-keys', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -76,7 +76,7 @@ export default function SettingsPage() {
     const handleGenerateCliToken = async () => {
         setGeneratingToken(true);
         try {
-            const res = await fetch('http://localhost:5000/api/auth/cli-token', {
+            const res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/auth/cli-token', {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
             });

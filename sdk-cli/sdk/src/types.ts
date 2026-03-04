@@ -21,7 +21,7 @@ export interface MindflareConfig {
 
     /**
      * Base URL of the Mindflare API.
-     * @default "http://localhost:5000"
+     * @default "https://mindflare-api.onrender.com"
      */
     baseUrl?: string;
 

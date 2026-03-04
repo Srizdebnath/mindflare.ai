@@ -65,7 +65,7 @@ function ApplicationsContent() {
     const fetchApps = async () => {
         if (!token) return;
         try {
-            const res = await fetch('http://localhost:5000/api/applications/', {
+            const res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/applications/', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const data = await res.json();
@@ -79,7 +79,7 @@ function ApplicationsContent() {
 
         fetchApps();
         // Fetch live models
-        fetch('http://localhost:5000/api/models/', {
+        fetch(process.env.NEXT_PUBLIC_API_URL + '/models/', {
             headers: { 'Authorization': `Bearer ${token}` }
         }).then(r => r.json()).then(d => {
             const list: ModelDoc[] = d.models || [];
@@ -90,7 +90,7 @@ function ApplicationsContent() {
         }).catch(() => { });
 
         // Check GitHub connection status
-        fetch('http://localhost:5000/api/github/status', {
+        fetch(process.env.NEXT_PUBLIC_API_URL + '/github/status', {
             headers: { 'Authorization': `Bearer ${token}` }
         }).then(r => r.json()).then(d => {
             setGhConnected(d.connected);
@@ -111,7 +111,7 @@ function ApplicationsContent() {
         const tk = localStorage.getItem('token');
         if (!tk) return;
         try {
-            const res = await fetch('http://localhost:5000/api/github/repos', {
+            const res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/github/repos', {
                 headers: { 'Authorization': `Bearer ${tk}` }
             });
             const d = await res.json();
@@ -122,7 +122,7 @@ function ApplicationsContent() {
     const connectGitHub = async () => {
         setGhLoading(true);
         try {
-            const res = await fetch('http://localhost:5000/api/github/auth', {
+            const res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/github/auth', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const d = await res.json();
@@ -141,7 +141,7 @@ function ApplicationsContent() {
         setPrResult(null);
         const loadingT = toast.loading('Generating integration code and opening PR...');
         try {
-            const res = await fetch('http://localhost:5000/api/github/auto-pr', {
+            const res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/github/auto-pr', {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -171,7 +171,7 @@ function ApplicationsContent() {
         setLoading(true);
         const loadingToast = toast.loading('Initializing application...');
         try {
-            const res = await fetch('http://localhost:5000/api/applications/', {
+            const res = await fetch(process.env.NEXT_PUBLIC_API_URL + '/applications/', {
                 method: 'POST',
                 headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
                 body: JSON.stringify({ app_name: newAppName, model_name: newModel })
@@ -202,7 +202,7 @@ function ApplicationsContent() {
                         onClick={async () => {
                             toast.dismiss(t.id);
                             try {
-                                await fetch(`http://localhost:5000/api/applications/${appId}`, {
+                                await fetch(`${process.env.NEXT_PUBLIC_API_URL}/applications/${appId}`, {
                                     method: 'DELETE',
                                     headers: { 'Authorization': `Bearer ${token}` }
                                 });

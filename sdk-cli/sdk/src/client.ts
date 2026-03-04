@@ -15,7 +15,7 @@ import type {
     ChatMessage,
 } from "./types.js";
 
-const DEFAULT_BASE_URL = "http://localhost:5000";
+const DEFAULT_BASE_URL = "https://mindflare-api.onrender.com";
 const DEFAULT_TIMEOUT = 30_000;
 const DEFAULT_MAX_RETRIES = 2;
 const SDK_VERSION = "0.1.0";

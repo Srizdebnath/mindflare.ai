@@ -18,7 +18,7 @@ function GitHubCallbackContent() {
             return;
         }
 
-        fetch("http://localhost:5000/api/github/callback", {
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/github/callback`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
