@@ -58,7 +58,11 @@
 }
 
 body {
-  background: url('/bg-sakura.png') no-repeat center center fixed;
+  background-color: #536175;
+  background-image: url('/bg-sakura.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
   background-size: cover;
   color: var(--text-primary);
   font-family: var(--font-geist-sans), 'JetBrains Mono', system-ui, sans-serif;

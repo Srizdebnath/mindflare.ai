@@ -60,9 +60,13 @@ export default function CustomCursor() {
             <img
                 src="/sakura.png"
                 alt=""
-                width={36}
-                height={36}
-                style={{ display: 'block', userSelect: 'none', draggable: 'false' } as React.CSSProperties}
+                width={32}
+                height={32}
+                className="w-8 h-8 object-contain"
+                onError={(e) => {
+                    (e.target as HTMLImageElement).src = '/cursor.png';
+                }}
+                style={{ display: 'block', userSelect: 'none' } as React.CSSProperties}
             />
         </div>
     );

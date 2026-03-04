@@ -6,7 +6,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 const assetsToPreload = [
     '/bg-sakura.png',
     '/MindFlare_2.jpg',
-    // Add other critical assets if needed
+    '/sakura.png',
+    '/cursor.png',
+
 ];
 
 export default function Preloader() {
