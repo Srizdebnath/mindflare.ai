@@ -1,5 +1,6 @@
 import os
 import logging
+import certifi
 from pymongo import MongoClient, ASCENDING, IndexModel
 from dotenv import load_dotenv
 
@@ -8,8 +9,15 @@ logger = logging.getLogger(__name__)
 
 MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017/mindflare")
 
+# Use certifi's CA bundle for TLS — required for Atlas on Python 3.12+ cloud hosts
+_is_atlas = "mongodb+srv" in MONGO_URI or "mongodb.net" in MONGO_URI
+_mongo_kwargs = {"serverSelectionTimeoutMS": 5000}
+if _is_atlas:
+    _mongo_kwargs["tlsCAFile"] = certifi.where()
+
 try:
-    client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000)
+    client = MongoClient(MONGO_URI, **_mongo_kwargs)
+
     # Check connection
     client.admin.command("ping")
     db = client.get_database()

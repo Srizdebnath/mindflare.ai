@@ -15,6 +15,8 @@ Werkzeug==3.1.6
 
 # Database
 pymongo==4.10.1
+certifi>=2024.2.2
+dnspython>=2.6.1
 
 # HTTP
 requests==2.32.5
@@ -46,3 +48,12 @@ redis==5.2.0
 
 # Misc
 numpy==2.2.3
+
+# Google AI (used in github_routes.py)
+google-generativeai==0.8.4
+
+# Web crawling via Firecrawl API
+firecrawl-py>=1.0.0
+
+# Auth0
+auth0-python==4.7.1
