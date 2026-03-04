@@ -32,7 +32,7 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen bg-retro-ink flex items-center justify-center p-6 relative overflow-hidden">
+        <div className="min-h-screen bg-transparent flex items-center justify-center p-6 relative overflow-hidden transition-opacity">
             {/* Background elements */}
             <div className="fixed inset-0 z-0 bg-pixel-grid opacity-20 pointer-events-none" style={{ backgroundSize: "32px 32px" }} />
             <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-retro-cyan/5 blur-[120px] rounded-full pointer-events-none" />

@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import { Toaster } from "react-hot-toast";
 import CustomCursor from "@/components/CustomCursor";
 import { Providers } from "@/components/providers";
+import Preloader from "@/components/Preloader";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -32,6 +33,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Providers>
+          <Preloader />
           <CustomCursor />
           {children}
           <Toaster
