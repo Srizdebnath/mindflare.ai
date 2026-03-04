@@ -353,6 +353,7 @@ export default function Home() {
           </div>
           <p className="font-mono text-xs text-retro-muted">© 2026 MindflareAI. Engineering excellence in AI orchestration.</p>
           <div className="flex items-center gap-6">
+            <a href="https://discordapp.com/users/srizdebnath" target="_blank" rel="noopener noreferrer" className="font-mono text-xs text-retro-muted hover:text-retro-cyan transition-none">Discord</a>
             <Link href="#" className="font-mono text-xs text-retro-muted hover:text-retro-cyan transition-none">Terms</Link>
             <Link href="#" className="font-mono text-xs text-retro-muted hover:text-retro-cyan transition-none">Privacy</Link>
           </div>

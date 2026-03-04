@@ -82,13 +82,14 @@ export default function DocsPage() {
                 <div className="mb-16">
                     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, ease: 'linear' }}>
                         <div className="inline-flex items-center gap-2 px-3 py-1.5 mb-6 bg-retro-panel border-3 border-retro-cyan shadow-pixel-sm font-mono text-xs text-retro-cyan">
-                            <Zap className="w-3 h-3" /> DEVELOPER DOCUMENTATION
+                            <Zap className="w-3 h-3" /> ENTERPRISE RAG DOCUMENTATION
                         </div>
                         <h1 className="font-pixel text-5xl md:text-6xl mb-6 text-retro-white leading-none">
-                            Build with <span className="text-retro-cyan">Mindflare</span>
+                            Orchestrate <span className="text-retro-cyan">Intelligence</span>
                         </h1>
                         <p className="text-xl text-retro-muted max-w-2xl leading-relaxed font-mono">
-                            Integrate world-class RAG-powered AI into your applications in minutes using our professional CLI and TypeScript SDK.
+                            Integrate grounded AI into your enterprise applications in minutes using our professional CLI and SDKs.
+                            Manage multiple pipelines, RAG ingestion, and neural orchestration from a single source.
                         </p>
                     </motion.div>
                 </div>
@@ -241,18 +242,29 @@ export default function DocsPage() {
                                             Full multi-key strict authentication is also available in our official Python SDK.
                                         </p>
                                         <DosTerminal title="python">
-                                            <span className="text-retro-muted">## pip install mindflare-sdk</span>{"\n"}
+                                            <span className="text-retro-muted">## pip install mindflare-py</span>{"\n"}
                                             <span className="text-[#7B9EC4]">from</span> mindflare <span className="text-[#7B9EC4]">import</span> Mindflare{"\n\n"}
                                             mf = Mindflare({"\n"}
-                                            &nbsp;&nbsp;email=<span className="text-[#A8D8B0]">"dev@startup.com"</span>,{"\n"}
-                                            &nbsp;&nbsp;password=<span className="text-[#A8D8B0]">"••••••••"</span>,{"\n"}
-                                            &nbsp;&nbsp;client_secret=<span className="text-[#A8D8B0]">"mf_sk_••••••••"</span>,{"\n"}
-                                            &nbsp;&nbsp;app_id=<span className="text-[#A8D8B0]">"mf_app_123"</span>,{"\n"}
-                                            &nbsp;&nbsp;api_key=<span className="text-[#A8D8B0]">"mf_secret_xyz"</span>{"\n"}
+                                            &nbsp;&nbsp;apiKey=<span className="text-[#A8D8B0]">"mf_secret_xyz"</span>,{"\n"}
+                                            &nbsp;&nbsp;baseUrl=<span className="text-[#A8D8B0]">"https://mindflare-api.onrender.com"</span>{"\n"}
                                             ){"\n\n"}
-                                            reply = mf.ask(<span className="text-[#A8D8B0]">"What is quantum computing?"</span>){"\n"}
+                                            reply = mf.ask(<span className="text-[#A8D8B0]">"What is neural orchestration?"</span>){"\n"}
                                             print(reply)
                                         </DosTerminal>
+                                    </section>
+
+                                    <section>
+                                        <SectionHeader title="Security & Identity" icon={Shield} />
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div className="bg-retro-panel border-3 border-retro-border p-5">
+                                                <h4 className="font-pixel text-retro-cyan mb-2">Native Auth</h4>
+                                                <p className="font-mono text-xs text-retro-muted">Standard JWT-based sessions stored in secure HTTP-only cookies and local storage.</p>
+                                            </div>
+                                            <div className="bg-retro-panel border-3 border-retro-border p-5">
+                                                <h4 className="font-pixel text-retro-cyan mb-2">Key Scoping</h4>
+                                                <p className="font-mono text-xs text-retro-muted">App-specific API keys are salt-hashed using AES-256 before storage in MongoDB.</p>
+                                            </div>
+                                        </div>
                                     </section>
                                 </motion.div>
                             ) : (
@@ -321,9 +333,14 @@ export default function DocsPage() {
                         <div className="bg-retro-panel border-3 border-retro-cyan shadow-pixel-cyan p-6">
                             <h3 className="font-pixel text-lg text-retro-white mb-2">Need help?</h3>
                             <p className="font-mono text-sm text-retro-muted mb-4 leading-relaxed">Our developer success team is here to help you scale your AI infra.</p>
-                            <button className="w-full py-2.5 bg-retro-cyan text-retro-ink border-3 border-retro-cyan-dark shadow-pixel-sm font-pixel text-sm hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-none active:translate-x-[4px] active:translate-y-[4px]">
-                                Join Developer Discord
-                            </button>
+                            <a
+                                href="https://discordapp.com/users/srizdebnath"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-full inline-block text-center py-2.5 bg-retro-cyan text-retro-ink border-3 border-retro-cyan-dark shadow-pixel-sm font-pixel text-sm hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-none active:translate-x-[4px] active:translate-y-[4px]"
+                            >
+                                Discord: srizdebnath
+                            </a>
                         </div>
                     </div>
                 </div>
