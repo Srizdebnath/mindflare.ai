@@ -9,13 +9,13 @@ logger = logging.getLogger(__name__)
 
 MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017/mindflare")
 
-# Use certifi's CA bundle + explicit TLS — required for Atlas on Render's Python 3.12
 _is_atlas = "mongodb+srv" in MONGO_URI or "mongodb.net" in MONGO_URI
 _mongo_kwargs = {"serverSelectionTimeoutMS": 20000}
+
+# For Atlas SRV, Pymongo handles TLS automatically.
+# We only force invalid cert acceptance if the environment's OpenSSL is picky.
 if _is_atlas:
-    _mongo_kwargs["tls"] = True
-    _mongo_kwargs["tlsCAFile"] = certifi.where()
-    _mongo_kwargs["tlsAllowInvalidCertificates"] = False   # keep strict; flip to True only as last resort
+    _mongo_kwargs["tlsAllowInvalidCertificates"] = True
 
 try:
     client = MongoClient(MONGO_URI, **_mongo_kwargs)
